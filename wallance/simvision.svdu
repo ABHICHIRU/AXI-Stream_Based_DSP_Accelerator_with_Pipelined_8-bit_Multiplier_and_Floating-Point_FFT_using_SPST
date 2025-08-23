@@ -1,0 +1,3 @@
+#SimVision database utility command line:
+
+simvisdbutil -sequence -output /home/vgnaiduk/Desktop/proj/simvision.trn -sst2
