@@ -1,4 +1,6 @@
 High-Performance 8-bit Multipliers & Floating-Point FFT with Pipelining and SPST Optimization
+
+
 📌 Overview
 
 This repository contains multiple 8-bit multiplier architectures and an optional advanced 8-point FFT block, all implemented in Verilog HDL, optimized for low power and high speed using:
