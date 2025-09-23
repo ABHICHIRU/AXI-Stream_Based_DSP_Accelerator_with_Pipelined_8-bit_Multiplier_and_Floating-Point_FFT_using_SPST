@@ -1,93 +1,157 @@
-# AXI-Stream DSP Accelerator: 8-bit Multiplier + Floating-Point FFT (Handshake Interface)
+AXI-Stream Based DSP Accelerator with Pipelined 8-bit Multiplier and Floating-Point FFT using SPST Optimization
+A high-performance, synthesizable RTL design that integrates 8-bit integer multipliers and a floating-point FFT block with pipelining, SPST (Single-Pulse Single-Transfer) optimization, and a fully AXI-Stream compatible handshake protocol.
 
-A high-performance, synthesizable RTL design that integrates **8-bit integer multipliers** and a **floating-point FFT block** with pipelining, SPST (Single-Pulse Single-Transfer) optimization, and a fully AXI-Stream compatible handshake protocol.  
-This project is designed for FPGA/ASIC integration and optimized for **high throughput** and **low latency**.
+This project builds on previous DSP accelerator concepts to achieve:
 
----
+High throughput and low latency digital signal processing
 
-## 📑 Table of Contents
-- [Overview](#overview)
-- [Key Features](#key-features)
-- [System Architecture](#system-architecture)
-- [AXI Handshake Protocol](#axi-handshake-protocol)
-- [File Structure](#file-structure)
-- [Usage Instructions](#usage-instructions)
-- [Reports & Results](#reports--results)
-- [Performance Benchmarks](#performance-benchmarks)
-- [Future Work](#future-work)
-- [Contributing](#contributing)
-- [License](#license)
+Efficient power optimization using SPST technique that disables unused logic dynamically
 
----
+AXI-Stream handshake interface for seamless streaming data transfer suitable for FPGA and ASIC design flows
 
-## 🔎 Overview
+Full compatibility with Cadence Genus synthesis and implementation tools
 
-This project demonstrates a **pipelined DSP accelerator** with:
-- **8-bit integer multipliers** (high-speed)
-- **Floating-point FFT computation**
-- **AXI-stream handshake interface** for data transfer
-- **SPST optimization** to minimize power by disabling unused logic dynamically
+Table of Contents
+Overview
 
-It can be easily integrated into a larger SoC or DSP pipeline.
+Key Features
 
----
+System Architecture
 
-## 🚀 Key Features
+AXI Handshake Protocol
 
-- ✅ **AXI-Stream Valid/Ready handshake** interface  
-- ✅ **High-throughput pipelining** to achieve near one-sample-per-cycle throughput  
-- ✅ **SPST Optimization** for power savings  
-- ✅ Synthesizable RTL (Verilog)  
-- ✅ **Fully verified testbench with waveform analysis**  
-- ✅ Compatible with Cadence Genus 
+File Structure
 
----
+Usage Instructions
 
-## 🏗 System Architecture
-        +---------------------------+
-AXI-Stream | | AXI-Stream
-In ---> | Multiplier / FFT Core | ---> Out
-| (Pipelined + SPST Control) |
-+---------------------------+
-^ ^
-| |
-Handshake Handshake
-Logic Logic
-- **Multiplier Path:** 8-bit high-speed integer multiplier  
-- **FFT Path:** Floating-point FFT engine with pipelined stages  
-- **Handshake Logic:** Implements AXI-Stream valid/ready protocol  
+Reports & Results
 
----
+Performance Benchmarks
 
-## 🔄 AXI Handshake Protocol
+Future Work
 
-Implements **valid/ready handshake**:
+Contributing
 
-- **Input:** `tvalid`, `tready`, `tdata`  
-- **Output:** `tvalid`, `tready`, `tdata`  
+License
+
+Overview
+This repository demonstrates a pipelined DSP accelerator that interoperates the following components:
+
+8-bit high-speed integer multipliers to handle fixed-point multiplication
+
+Floating-point FFT computation engine, pipelined for throughput
+
+AXI-stream handshake interface for robust and backpressure-aware data streaming
+
+SPST optimization which applies power reduction by gating inactive sections of logic
+
+Its architecture and handshake controls make it easy to integrate the accelerator into wider SoC or FPGAs.
+
+Key Features
+✅ Fully compliant AXI-Stream Valid/Ready handshake
+
+✅ Pipelined design for near one-sample-per-cycle throughput
+
+✅ SPST power optimization for reduced dynamic power
+
+✅ Synthesizable Verilog RTL, suitable for FPGA/ASIC
+
+✅ Verified with testbenches and waveform analysis
+
+✅ Cadence Genus compatible synthesis scripts included
+
+System Architecture
+text
+    +---------------------------------+
+
+AXI Stream In --> | Multiplier + FFT Core | --> AXI Stream Out
+                  | (Pipelined with SPST) |
+    +---------------------------------+
+
+            Handshake Logic on Input and Output
+The multiplier and FFT core are tightly integrated with pipeline stages.
+
+Handshake logic governs flow control based on AXI-Stream protocol.
+
+AXI Handshake Protocol
+The design implements the AXI-Stream valid/ready handshake:
+
+Input signals: tvalid, tready, tdata
+
+Output signals: tvalid, tready, tdata
 
 Operation:
 
-1. Input source asserts `tvalid` when data is ready.  
-2. Design asserts `tready` when ready to accept new data.  
-3. Data is transferred only when **both are HIGH**.  
-4. Backpressure supported — if `tready` is LOW, upstream must hold data.  
+Input source asserts tvalid when data is ready.
 
----
+DSP accelerator asserts tready when able to accept data.
 
-🧭 Future Work
+Data transfers only when both tvalid and tready are high.
 
-Support for configurable FFT sizes (e.g. 256, 512, 1024 points)
+Backpressure supported: when tready is low, upstream holds data.
 
-Clock gating for better power reduction
+File Structure
+rtl/ — Verilog RTL source code for multiplier, FFT, handshake, SPST
 
-Integration with AXI4-Lite control interface
+tb/ — Testbench files with waveform dumping for verification
 
-FPGA implementation results with resource utilization
+scripts/ — Cadence Genus TCL scripts for synthesis, timing, and power analysis
 
-🤝 Contributing
+constraints/ — SDC files for synthesis timing constraints
 
-Contributions are welcome!
-Fork this repository, add improvements (testbenches, RTL optimizations, documentation), and submit a PR.
+docs/ — Documentation, diagrams, and notes
 
+Usage Instructions
+Clone the repository:
 
+bash
+git clone https://github.com/ABHICHIRU/AXI-Stream_Based_DSP_Accelerator_with_Pipelined_8-bit_Multiplier_and_Floating-Point_FFT_using_SPST_O.git
+cd AXI-Stream_Based_DSP_Accelerator_with_Pipelined_8-bit_Multiplier_and_Floating-Point_FFT_using_SPST_O
+Synthesize with Cadence Genus:
+
+Update synthesis TCL scripts if necessary with correct paths.
+
+Run:
+
+tcl
+source scripts/rcscript_slow.tcl   # For max timing with slow library
+# or
+source scripts/rcscript_fast.tcl   # For min timing with fast library
+Run simulation using the testbench in tb/ with your preferred simulator.
+
+Reports & Results
+Timing, power, and area reports are generated by the synthesis scripts.
+
+Waveform analysis confirms data and handshake accuracy.
+
+Performance benchmarks show throughput and latency improvements.
+
+Performance Benchmarks
+Pending full FPGA implementation, early results show:
+
+Near 1 sample per cycle throughput
+
+Significant power savings from SPST gating
+
+Scalable FFT length and configurable multiplier precision under development
+
+Future Work
+Support for larger FFT sizes (256, 512, 1024 points)
+
+Integration of AXI4-Lite control registers
+
+Clock gating and further power reduction techniques
+
+Full FPGA implementation results with resource utilization
+
+Contributing
+Contributions, improvements, and issues are welcome.
+
+Fork and submit pull requests.
+
+Add new testbenches, optimizations, or documentation.
+
+License
+This project is released under the MIT License.
+
+If you want me to prepare a README in Markdown format file for direct upload, please let me know.
