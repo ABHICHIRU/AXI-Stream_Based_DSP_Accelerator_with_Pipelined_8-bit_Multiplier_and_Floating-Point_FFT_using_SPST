@@ -1,157 +1,142 @@
-AXI-Stream Based DSP Accelerator with Pipelined 8-bit Multiplier and Floating-Point FFT using SPST Optimization
-A high-performance, synthesizable RTL design that integrates 8-bit integer multipliers and a floating-point FFT block with pipelining, SPST (Single-Pulse Single-Transfer) optimization, and a fully AXI-Stream compatible handshake protocol.
+# AXI-Stream Based DSP Accelerator with Pipelined 8-bit Multiplier and Floating-Point FFT using SPST Optimization
 
-This project builds on previous DSP accelerator concepts to achieve:
+A high-performance, synthesizable RTL design integrating **8-bit integer multipliers** and a **floating-point FFT block** with pipelining, SPST (Single-Pulse Single-Transfer) optimization, and a fully AXI-Stream compatible handshake protocol. Designed for FPGA and ASIC integration, optimized for **high throughput** and **low latency**.
 
-High throughput and low latency digital signal processing
+---
 
-Efficient power optimization using SPST technique that disables unused logic dynamically
+## Table of Contents
 
-AXI-Stream handshake interface for seamless streaming data transfer suitable for FPGA and ASIC design flows
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [System Architecture](#system-architecture)
+- [AXI Handshake Protocol](#axi-handshake-protocol)
+- [File Structure](#file-structure)
+- [Usage Instructions](#usage-instructions)
+- [Timing and Power Analysis](#timing-and-power-analysis)
+- [Design Safety](#design-safety)
+- [Future Work](#future-work)
+- [Contributing](#contributing)
+- [License](#license)
 
-Full compatibility with Cadence Genus synthesis and implementation tools
+---
 
-Table of Contents
-Overview
+## Overview
 
-Key Features
+This project demonstrates a **pipelined DSP accelerator** that combines:
 
-System Architecture
+- High-speed 8-bit integer multipliers
+- Floating-point FFT computation with pipelining
+- AXI-Stream handshake interface ensuring smooth data transfer
+- SPST optimization for power savings by disabling unused logic dynamically
 
-AXI Handshake Protocol
+Easy to integrate into SoCs or DSP pipelines targeting modern FPGA and ASIC flows.
 
-File Structure
+---
 
-Usage Instructions
+## Key Features
 
-Reports & Results
+- Full **AXI-Stream Valid/Ready handshake** protocol support
+- Pipeline design achieving near one sample per clock cycle throughput
+- Power optimization via **SPST (Single-Pulse Single-Transfer)** logic gating
+- Synthesizable Verilog RTL
+- Verified testbench with waveform analysis
+- Compatible with Cadence Genus synthesis and implementation tools
 
-Performance Benchmarks
+---
 
-Future Work
+## System Architecture
 
-Contributing
++---------------------------------+
+| AXI-Stream In --> |
+| Multiplier & FFT Core |
+| (Pipelined + SPST Control) --> AXI-Stream Out
++---------------------------------+
+^ ^
+| |
+Handshake Logic Handshake Logic
 
-License
 
-Overview
-This repository demonstrates a pipelined DSP accelerator that interoperates the following components:
+The accelerator includes:
 
-8-bit high-speed integer multipliers to handle fixed-point multiplication
+- **Multiplier path:** 8-bit pipelined integer multiplier
+- **FFT path:** Floating-point FFT engine with stages pipelined for throughput
+- **Handshake:** Implements AXI-Stream valid-ready logic for flow control and backpressure
 
-Floating-point FFT computation engine, pipelined for throughput
+---
 
-AXI-stream handshake interface for robust and backpressure-aware data streaming
+## AXI Handshake Protocol
 
-SPST optimization which applies power reduction by gating inactive sections of logic
+- Input signals: `tvalid`, `tready`, `tdata`
+- Output signals: `tvalid`, `tready`, `tdata`
 
-Its architecture and handshake controls make it easy to integrate the accelerator into wider SoC or FPGAs.
+Data transfer occurs only when both `tvalid` and `tready` are high, supporting flow control and backpressure.
 
-Key Features
-✅ Fully compliant AXI-Stream Valid/Ready handshake
+---
 
-✅ Pipelined design for near one-sample-per-cycle throughput
+## File Structure
 
-✅ SPST power optimization for reduced dynamic power
+- `rtl/` — Verilog RTL sources
+- `tb/` — Testbench and waveform files for verification
+- `scripts/` — Cadence Genus synthesis & analysis TCL scripts
+- `constraints/` — SDC timing constraints files
+- `docs/` — Documentation and diagrams
 
-✅ Synthesizable Verilog RTL, suitable for FPGA/ASIC
+---
 
-✅ Verified with testbenches and waveform analysis
+## Usage Instructions
 
-✅ Cadence Genus compatible synthesis scripts included
+2. Synthesize the design using Cadence Genus:
 
-System Architecture
-text
-    +---------------------------------+
+    ```
+    source scripts/rcscript2.tcl  # For max timing slow library
+    source scripts/rcscript3.tcl  # For min timing fast library
+    ```
 
-AXI Stream In --> | Multiplier + FFT Core | --> AXI Stream Out
-                  | (Pipelined with SPST) |
-    +---------------------------------+
+3. Simulate using the testbench files in `tb/`.
 
-            Handshake Logic on Input and Output
-The multiplier and FFT core are tightly integrated with pipeline stages.
+---
 
-Handshake logic governs flow control based on AXI-Stream protocol.
+## Timing and Power Analysis
 
-AXI Handshake Protocol
-The design implements the AXI-Stream valid/ready handshake:
+Synthesis scripts generate timing and power reports (`.rep` files) showing performance metrics like critical path delay and power consumption.
 
-Input signals: tvalid, tready, tdata
+---
 
-Output signals: tvalid, tready, tdata
+## Design Safety
 
-Operation:
+- The latest timing report indicates all timing paths meet constraints with **large positive slack margins (~7 ns)**, showing no setup or hold violations.
+- The design achieves stable operation at intended clock speeds.
+- Power estimates reflect SPST-based optimizations leading to reduced dynamic power.
+- Gate-level area reports confirm a balanced pipeline with ample sequential and combinational resource allocation.
 
-Input source asserts tvalid when data is ready.
+This confirms the design can be considered **safe and stable** for the targeted process and frequency.
 
-DSP accelerator asserts tready when able to accept data.
+---
 
-Data transfers only when both tvalid and tready are high.
+## Future Work
 
-Backpressure supported: when tready is low, upstream holds data.
+- Support larger configurable FFT sizes (256, 512, 1024, etc.)
+- Integrate AXI4-Lite control interface for configurability
+- Implement clock gating for improved power efficiency
+- FPGA implementation and resource utilization benchmarking
 
-File Structure
-rtl/ — Verilog RTL source code for multiplier, FFT, handshake, SPST
+---
 
-tb/ — Testbench files with waveform dumping for verification
+## Contributing
 
-scripts/ — Cadence Genus TCL scripts for synthesis, timing, and power analysis
+Contributions are welcome! Feel free to fork the repo, add features or tests, and submit pull requests.
 
-constraints/ — SDC files for synthesis timing constraints
+---
 
-docs/ — Documentation, diagrams, and notes
+## License
 
-Usage Instructions
-Clone the repository:
+This project is licensed under the MIT License.
 
-bash
-git clone https://github.com/ABHICHIRU/AXI-Stream_Based_DSP_Accelerator_with_Pipelined_8-bit_Multiplier_and_Floating-Point_FFT_using_SPST_O.git
-cd AXI-Stream_Based_DSP_Accelerator_with_Pipelined_8-bit_Multiplier_and_Floating-Point_FFT_using_SPST_O
-Synthesize with Cadence Genus:
+---
 
-Update synthesis TCL scripts if necessary with correct paths.
+Thank you for your interest and support.
 
-Run:
+---
 
-tcl
-source scripts/rcscript_slow.tcl   # For max timing with slow library
-# or
-source scripts/rcscript_fast.tcl   # For min timing with fast library
-Run simulation using the testbench in tb/ with your preferred simulator.
+Any questions or suggestions? Please open an issue or contact the maintainers.
 
-Reports & Results
-Timing, power, and area reports are generated by the synthesis scripts.
-
-Waveform analysis confirms data and handshake accuracy.
-
-Performance benchmarks show throughput and latency improvements.
-
-Performance Benchmarks
-Pending full FPGA implementation, early results show:
-
-Near 1 sample per cycle throughput
-
-Significant power savings from SPST gating
-
-Scalable FFT length and configurable multiplier precision under development
-
-Future Work
-Support for larger FFT sizes (256, 512, 1024 points)
-
-Integration of AXI4-Lite control registers
-
-Clock gating and further power reduction techniques
-
-Full FPGA implementation results with resource utilization
-
-Contributing
-Contributions, improvements, and issues are welcome.
-
-Fork and submit pull requests.
-
-Add new testbenches, optimizations, or documentation.
-
-License
-This project is released under the MIT License.
-
-If you want me to prepare a README in Markdown format file for direct upload, please let me know.
