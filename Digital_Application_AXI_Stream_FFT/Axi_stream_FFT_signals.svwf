@@ -1,0 +1,267 @@
+
+#
+# Mnemonic Maps
+#
+mmap new -reuse -name {Boolean as Logic} -radix %b -contents {{%c=FALSE -edgepriority 1 -shape low}
+{%c=TRUE -edgepriority 1 -shape high}}
+mmap new -reuse -name {Example Map} -radix %x -contents {{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}}
+
+array unset createdGroup
+array set createdGroup {}
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.M1[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.M05[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.P1[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.P2[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.P4[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.P8[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.P05[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.Z[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.clk}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.k}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.m_imag[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.m_ready}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.m_real[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.m_valid}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.rst_n}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.s_imag[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.s_ready}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.s_real[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.s_valid}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.yi[0:7]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.yr[0:7]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.M1[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.M05[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.P1[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.P2[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.P4[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.P8[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.P05[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.Z[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.clk}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.k}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.m_imag[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.m_ready}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.m_real[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.m_valid}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.rst_n}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.s_imag[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.s_ready}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.s_real[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.s_valid}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.yi[0:7]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.yr[0:7]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.M1[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.M05[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.P1[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.P2[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.P4[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.P8[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.P05[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.Z[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.clk}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.k}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.m_imag[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.m_ready}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.m_real[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.m_valid}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.rst_n}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.s_imag[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.s_ready}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.s_real[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.s_valid}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.yi[0:7]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.yr[0:7]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.M1[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.M05[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.P1[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.P2[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.P4[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.P8[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.P05[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.Z[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.clk}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.k}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.m_imag[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.m_ready}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.m_real[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.m_valid}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.rst_n}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.s_imag[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.s_ready}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.s_real[31:0]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.s_valid}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.yi[0:7]}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {tb_fft8_f32_stream.yr[0:7]}]}
+	} ]]
+
+waveform xview limits 0 115000ps
