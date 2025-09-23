@@ -138,5 +138,5 @@ Thank you for your interest and support.
 
 ---
 
-Any questions or suggestions? Please open an issue or contact the maintainers.
+Any questions or suggestions? Please open an issue .
 
