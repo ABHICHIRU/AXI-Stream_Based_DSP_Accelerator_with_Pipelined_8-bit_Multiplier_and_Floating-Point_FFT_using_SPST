@@ -32,44 +32,7 @@ Developed entirely within Cadence Genus, Innovus, and Xcelium environments, supp
 
 ---
 
-## System Architecture
-+------------------------------------------+
-| AXI-Stream Input Interface |
-| (tvalid, tready, tdata) |
-+------------------------------------------+
 
-
-| v +---------------
---------------------------+ | Input Buffer (
-ing-Pong) | +---------------
--
--
-----------------------+ |
-v +--------------------------------
----------+ | Pipelined 8-bit Multiplier Core
-| | (Array / Vedic / Booth / Wallac
-)
-
-| +------------------------------------
------+ | v +----
--------------------------------------+ | SPS
-Power Gating Control Logic | | (Dy
-a
-i
-stage enabling/disabling) | +--------
----------------------------------+
-| v +---------------------
---------------------+ | Floating-Point FFT E
-g
-n
-(Pipelined) | | (Radix-2 DIT with Twiddl
-Factors) | +-------------------------
-----------------+ |
-
-
-+------------------------------------------
-| Output Buffer (Ping-Pong)
-+------------------------------------------
 
 
 Key Datapath Components:
